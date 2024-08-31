@@ -1,4 +1,5 @@
 "use client";
+import { InventoryStats } from "@/components/inventoryStats";
 import { setInventory } from "@/lib/slice/inventory";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,5 +17,9 @@ export default function Home() {
       });
   }, []);
 
-  return null;
+  return (
+    <main>
+      <InventoryStats />
+    </main>
+  );
 }
