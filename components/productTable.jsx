@@ -57,9 +57,8 @@ export const ProductTable = () => {
   );
 };
 
-const ActionButton = ({ children, ...props }) => {
+const ActionButton = ({ children, className, ...props }) => {
   const role = useSelector((state) => state.role);
-  const { className } = { ...props };
   return (
     <button
       className={classNames("mx-1", {
