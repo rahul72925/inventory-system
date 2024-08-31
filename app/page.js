@@ -25,7 +25,7 @@ export default function Home() {
         console.log("product fetch err", err);
         setStatus("ERROR");
       });
-  }, []);
+  }, [dispatch]);
 
   if (status === "LOADING")
     return (
