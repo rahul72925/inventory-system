@@ -59,12 +59,14 @@ export const ProductTable = () => {
 
 const ActionButton = ({ children, ...props }) => {
   const role = useSelector((state) => state.role);
-
+  const { className } = { ...props };
   return (
     <button
       className={classNames("mx-1", {
         "cursor-not-allowed opacity-30": role.currentRole === "USER",
+        [className]: true,
       })}
+      disabled={role.currentRole === "USER"}
       {...props}
     >
       {children}
@@ -74,10 +76,9 @@ const ActionButton = ({ children, ...props }) => {
 
 const EditHandler = ({ product }) => {
   const modalRef = useRef();
-  const disableEditButton = !product.isActive;
 
   const handleEditClick = () => {
-    if (!disableEditButton) {
+    if (product.isActive) {
       modalRef.current.open();
     }
   };
@@ -91,7 +92,10 @@ const EditHandler = ({ product }) => {
       <Modal ref={modalRef}>
         <EditProductForm product={product} handleClose={handleClose} />
       </Modal>
-      <ActionButton disabled={disableEditButton} onClick={handleEditClick}>
+      <ActionButton
+        onClick={handleEditClick}
+        className={classNames("", { "cursor-not-allowed": !product.isActive })}
+      >
         <EditIcon />
       </ActionButton>
     </div>
